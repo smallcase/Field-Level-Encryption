@@ -4,8 +4,8 @@ const utils = require('../../lib/utils');
 module.exports = {
     getPaginatedData: async function (req, res) {
         try {
-            var page = parseInt(req.query.page);
-            var limit = parseInt(req.query.limit);
+            var page = parseInt(req.query.page || 1);
+            var limit = parseInt(req.query.limit || 10);
 
             const data = await searchService.getPaginatedData(page, limit);
             res.status(200).json(utils.createRes(true, null, data));
