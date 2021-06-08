@@ -14,6 +14,7 @@ async function getVideoData() {
         response = await axios.get(url, {
             params: {
                 key: config.google.apiKeys[0],
+                // key: 'config.google.apiKeys[0]',
                 type: 'video',
                 order: 'date',
                 part: 'snippet',
@@ -54,10 +55,24 @@ async function getVideoData() {
     }
 }
 
-module.exports = {
-    getData: async function () {
+async function run() {
+    try {
         const data = await getVideoData();
         await youtubeData.insertData(data);
-        return true;
+        return `Youtube data fetched : ${new Date().toISOString()}`;
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = {
+    getData: function (callback) {
+        run()
+            .then((data) => {
+                return callback(null, data);
+            })
+            .catch((err) => {
+                return callback(err, null);
+            });
     },
 };
