@@ -1,5 +1,4 @@
 const youtubeData = require('../data/youtube');
-const { google } = require('googleapis');
 const axios = require('axios');
 const config = require('../../lib/config');
 const utils = require('../../lib/utils');

@@ -2,6 +2,17 @@ const searchData = require('../data/search');
 const nodeCahce = require('node-cache');
 var pageCache = new nodeCahce({ stdTTL: 3600 });
 
+function buildRegex(text) {
+    var words = text.split(' ');
+    var regex = '';
+    words.forEach((word) => {
+        word = word.trim();
+        word = word.replace(/[^a-zA-Z0-9]/g, '');
+        if (word) regex += `${word}|`;
+    });
+    return regex.slice(0, -1);
+}
+
 module.exports = {
     // We are storing the data ordered by date
     // So _id is also sorted by date and not publishedAt
@@ -19,13 +30,6 @@ module.exports = {
     // Hence, using skip and limit is the most correct option to proceed with, although not the most efficient
 
     getPaginatedData: async function (page, limit) {
-        // Check if last pageId is present
-        // If present
-        // find({ _id > lastPageId }).limit(limit)
-        // If not, check that for given limit which is the last page that is available
-        // offset = lastPageAvailable
-        // find ({ _id > lastPageAvailable }).skip(offset).limit(limit)
-
         var data = await searchData.getPagedDataSortedByPublishedAt(
             page,
             limit
@@ -35,6 +39,14 @@ module.exports = {
     },
 
     getFilteredData: async function (title, description) {
-        return await searchData.getFilteredData(title, description);
+        if (title || description) {
+            var titleRegex = title ? buildRegex(title) : null;
+            var descriptionRegex = description ? buildRegex(description) : null;
+
+            return await searchData.getFilteredData(
+                titleRegex,
+                descriptionRegex
+            );
+        } else return await searchData.getPagedDataSortedByPublishedAt(1, 10);
     },
 };

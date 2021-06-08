@@ -14,9 +14,15 @@ const thumbnailSchema = new Schema(
 
 const videoSchema = new Schema(
     {
-        title: String,
-        description: String,
-        publishedAt: Date,
+        // Indexing for filter api, which searches title or description
+        // Did not create a text index, because we will be doing regex search on these fields
+        title: { type: String, index: true },
+        description: { type: String, index: true },
+
+        // Indexed because this is used for sorting in /video/ api
+        // Used for pagination
+        publishedAt: { type: Date, index: true },
+
         thumbnail: {
             default: thumbnailSchema,
             high: thumbnailSchema,
