@@ -1,6 +1,4 @@
 const searchData = require('../data/search');
-const nodeCahce = require('node-cache');
-var pageCache = new nodeCahce({ stdTTL: 3600 });
 
 function buildRegex(text) {
     var words = text.split(' ');

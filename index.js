@@ -70,8 +70,7 @@ connections.init(function (err, connection) {
         next();
     });
 
-    setInterval(callYoutubeService, 3000);
-    // callYoutubeService();
+    setInterval(callYoutubeService, config.google.youtube.pollingInterval);
 
     app.use('/videos', searchRoutes);
 

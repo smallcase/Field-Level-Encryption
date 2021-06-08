@@ -14,20 +14,6 @@ module.exports = {
         }
     },
 
-    // Since we are storing data according to publishedAt
-    // _id is also sorted according to publishedAt
-    getVideoData: async function (query, limit) {
-        try {
-            return await models.Video.find(query)
-                .sort({ publishedAt: -1 })
-                .limit(limit)
-                .lean();
-        } catch (error) {
-            console.log(error);
-            throw new Error(`Error in getting data from db : ${error.message}`);
-        }
-    },
-
     getFilteredData: async function (titleRegex, descriptionRegex) {
         var query = {};
         if (titleRegex) query['title'] = { $regex: titleRegex, $options: 'ig' };

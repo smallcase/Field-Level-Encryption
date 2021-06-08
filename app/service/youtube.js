@@ -10,7 +10,6 @@ async function callYoutubeApi(apiKey) {
     response = await axios.get(url, {
         params: {
             key: apiKey,
-            // key: 'config.google.apiKeys[0]',
             type: 'video',
             order: 'date',
             part: 'snippet',
