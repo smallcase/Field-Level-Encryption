@@ -15,6 +15,13 @@ connections.init(function (err, connection) {
     var app = express();
     app.use(bodyParser.json());
 
+    app.use((req, res, next) => {
+        res.on('finish', () => {
+            console.log(`${res.statusCode} ${res.statusMessage} ${req.url}`);
+        });
+        next();
+    });
+
     process.on('uncaughtException', function (err) {
         console.error(err);
     });
@@ -45,7 +52,7 @@ connections.init(function (err, connection) {
         next();
     });
 
-    app.use('/', routes);
+    app.use('/youtube', routes);
 
     app.listen(config.server.port, () => {
         console.info(

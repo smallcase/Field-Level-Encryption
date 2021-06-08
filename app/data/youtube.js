@@ -1,9 +1,12 @@
 const models = require('../../models/index');
 
 module.exports = {
-    test: async function () {
-        const data = await models.Video.find({}).lean();
-        console.log(data);
-        return data;
+    insertData: async function (data) {
+        try {
+            await models.Video.insertMany(data);
+        } catch (error) {
+            console.log(error);
+            throw new Error(`Error in inserting data in db : ${error.message}`);
+        }
     },
 };
