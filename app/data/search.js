@@ -27,4 +27,16 @@ module.exports = {
             throw new Error(`Error in getting data from db : ${error.message}`);
         }
     },
+
+    getFilteredData: async function (title, description) {
+        var query = {};
+        if (title) query['title'] = title;
+        if (description) query['description'] = description;
+        try {
+            return await models.Video.find(query).lean();
+        } catch (error) {
+            console.log(error);
+            throw new Error(`Error in getting data from db : ${error.message}`);
+        }
+    },
 };

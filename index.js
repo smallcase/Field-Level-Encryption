@@ -54,7 +54,7 @@ connections.init(function (err, connection) {
     });
 
     app.use('/youtube', youtubeRoutes);
-    app.use('/', searchRoutes);
+    app.use('/videos', searchRoutes);
 
     app.listen(config.server.port, () => {
         console.info(

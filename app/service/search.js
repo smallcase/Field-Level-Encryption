@@ -33,4 +33,8 @@ module.exports = {
 
         return data;
     },
+
+    getFilteredData: async function (title, description) {
+        return await searchData.getFilteredData(title, description);
+    },
 };
