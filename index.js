@@ -7,13 +7,21 @@ var connections = require('./connections/index')();
 const searchRoutes = require('./app/routes/search');
 
 var youtubeService = require('./app/service/youtube');
+var currentApiKeyIndex = 0;
 
 function callYoutubeService() {
-    youtubeService.getData(function (err, data) {
-        if (err) console.log(err);
-        else if (!data) console.log('No data recieved from youtube service');
-        else console.log(data);
-    });
+    youtubeService.getData(
+        currentApiKeyIndex,
+        function (err, workingApiKeyIndex) {
+            if (err) console.log(err);
+            else {
+                console.log(
+                    `Youtube data fetched : ${new Date().toISOString()}`
+                );
+                currentApiKeyIndex = workingApiKeyIndex;
+            }
+        }
+    );
 }
 
 connections.init(function (err, connection) {
@@ -62,7 +70,8 @@ connections.init(function (err, connection) {
         next();
     });
 
-    setInterval(callYoutubeService, 10000);
+    setInterval(callYoutubeService, 3000);
+    // callYoutubeService();
 
     app.use('/videos', searchRoutes);
 
