@@ -10,7 +10,8 @@ connections.init(function (err, connection) {
         process.exit(1);
     }
 
-    const routes = require('./app/routes/youtube');
+    const youtubeRoutes = require('./app/routes/youtube');
+    const searchRoutes = require('./app/routes/search');
 
     var app = express();
     app.use(bodyParser.json());
@@ -52,7 +53,8 @@ connections.init(function (err, connection) {
         next();
     });
 
-    app.use('/youtube', routes);
+    app.use('/youtube', youtubeRoutes);
+    app.use('/', searchRoutes);
 
     app.listen(config.server.port, () => {
         console.info(

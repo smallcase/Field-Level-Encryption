@@ -10,8 +10,4 @@ module.exports = {
             res.status(500).json(utils.createRes(false, error.message, null));
         }
     },
-
-    test: async function (req, res) {
-        res.status(200).send('Test');
-    },
 };
