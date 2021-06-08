@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+    adminmongo:
+        image: 'mrvautin/adminmongo'
+        ports:
+            - 1234:1234
+
+    mongo:
+        container_name: mongo
+        image: mongo:latest
+        ports:
+            - '27017:27017'
+        volumes:
+            - mongoInit.js
+
+    app:
+        # image: docker.io/library/download-reports:1.1
+        build: .
+        env_file:
+            - .env
+        command: node index
+        ports:
+            - '8900:8900'
+        depends_on:
+            - 'mongo'
