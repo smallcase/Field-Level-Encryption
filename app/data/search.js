@@ -28,10 +28,11 @@ module.exports = {
         }
     },
 
-    getFilteredData: async function (title, description) {
+    getFilteredData: async function (titleRegex, descriptionRegex) {
         var query = {};
-        if (title) query['title'] = title;
-        if (description) query['description'] = description;
+        if (titleRegex) query['title'] = { $regex: titleRegex, $options: 'ig' };
+        if (descriptionRegex)
+            query['description'] = { $regex: descriptionRegex, $options: 'ig' };
         try {
             return await models.Video.find(query).lean();
         } catch (error) {
