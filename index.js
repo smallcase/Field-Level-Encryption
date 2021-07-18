@@ -4,25 +4,7 @@ var cors = require('cors');
 var config = require('./lib/config');
 var connections = require('./connections/index')();
 
-const searchRoutes = require('./app/routes/search');
-
-var youtubeService = require('./app/service/youtube');
-var currentApiKeyIndex = 0;
-
-function callYoutubeService() {
-    youtubeService.getData(
-        currentApiKeyIndex,
-        function (err, workingApiKeyIndex) {
-            if (err) console.log(err);
-            else {
-                console.log(
-                    `Youtube data fetched : ${new Date().toISOString()}`
-                );
-                currentApiKeyIndex = workingApiKeyIndex;
-            }
-        }
-    );
-}
+const userRoutes = require('./app/routes/user');
 
 connections.init(function (err, connection) {
     if (err) {
@@ -70,12 +52,7 @@ connections.init(function (err, connection) {
         next();
     });
 
-    setInterval(
-        callYoutubeService,
-        config.google.youtube.pollingInterval * 1000
-    );
-
-    app.use('/videos', searchRoutes);
+    app.use('/', userRoutes);
 
     app.listen(config.server.port, () => {
         console.info(

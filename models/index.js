@@ -1,5 +1,5 @@
-const videoSchema = require('./video');
+const userSchema = require('./user');
 
 module.exports = {
-    Video: videoSchema,
+    User: userSchema,
 };
