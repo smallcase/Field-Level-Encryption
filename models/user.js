@@ -21,5 +21,5 @@ const userSchema = new Schema(
 
 userSchema.plugin(mongooseLeanGetter);
 
-const Video = mongoose.model('users', userSchema, 'users');
-module.exports = Video;
+const User = mongoose.model('users', userSchema, 'users');
+module.exports = User;
