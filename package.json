@@ -1,5 +1,5 @@
 {
-    "name": "Field-Level-Encryption",
+    "name": "field-level-encryption",
     "version": "1.0.0",
     "description": "API to test Field Level Encryption on mongoose comunity server using mongoose",
     "main": "index.js",
