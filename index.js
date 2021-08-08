@@ -55,8 +55,6 @@ connections.init(function (err, connection) {
     app.use('/', userRoutes);
 
     app.listen(config.server.port, () => {
-        console.info(
-            'youtube search API running on port - ' + config.server.port
-        );
+        console.info('FLE API running on port - ' + config.server.port);
     });
 });

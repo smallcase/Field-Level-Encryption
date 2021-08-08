@@ -1,26 +1,26 @@
 {
-  "name": "youtube-search",
-  "version": "1.0.0",
-  "description": "API to fetch latest videos sorted in reverse chronological order of their publishing date-time from YouTube for a given tag/search query in a paginated response",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "YouTube",
-    "API"
-  ],
-  "author": "Tejas Agrawal",
-  "license": "ISC",
-  "dependencies": {
-    "apicache": "^1.6.2",
-    "async": "^3.2.0",
-    "axios": "^0.21.1",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.12.13",
-    "mongoose-lean-getters": "^0.2.0",
-    "nodemon": "^2.0.7"
-  }
+    "name": "Field-Level-Encryption",
+    "version": "1.0.0",
+    "description": "API to test Field Level Encryption on mongoose comunity server using mongoose",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "Field Level Encryption",
+        "API"
+    ],
+    "author": "Tejas Agrawal",
+    "license": "ISC",
+    "dependencies": {
+        "apicache": "^1.6.2",
+        "async": "^3.2.0",
+        "axios": "^0.21.1",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mongoose": "^5.12.13",
+        "mongoose-lean-getters": "^0.2.0",
+        "nodemon": "^2.0.7"
+    }
 }
